@@ -1,4 +1,4 @@
-# Tisa- lab3 - variant1
+# Tisa - lab3 - variant1
 
 This repo is the Lab3 of Computational Process Organization in ITMO, 2022 spring.
 
