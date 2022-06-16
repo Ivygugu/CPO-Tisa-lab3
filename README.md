@@ -24,7 +24,7 @@ This repo is the Lab3 of Computational Process Organization in ITMO, 2022 spring
 
 - `convert()`: Converts the original formula to a postfix expression.
 
-- `visualize`: visualize dataflow. 
+- `visualize`: visualize dataflow.
 
 - `evaluate`: Evaluate result of the expression.
 
