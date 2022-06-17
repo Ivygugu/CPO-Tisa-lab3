@@ -39,6 +39,4 @@ This repo is the Lab3 of Computational Process Organization in ITMO, 2022 spring
 
 ## Design notes
 
-### Compare mutable and immutable implementation
-
-  - Parse input string in a tree
+- Parse input string in a tree
