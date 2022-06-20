@@ -1,5 +1,8 @@
 import unittest
+from math import sin, cos, tan, log
 
+from hypothesis import given
+import hypothesis.strategies as st
 from MathExpTree import MathExpTree
 
 
@@ -8,14 +11,8 @@ class MathTest(unittest.TestCase):
     def test_sin_func(self):
         i = MathExpTree('sin(0)+func(5)*(5-1)')
         i.convert()
-        self.assertEqual(i.evaluate(func=lambda x: x * 42), 840.0)
+        self.assertEqual(i.evaluate(func=lambda x: x * 42), 840)
         i.visualize(1)
-
-    def test_add_minus(self):
-        i = MathExpTree('2+1+(8-2)')
-        i.convert()
-        self.assertEqual(i.evaluate(), 9.0)
-        i.visualize(2)
 
     def test_cos_pow(self):
         i = MathExpTree('cos(0)+func(5)+pow(2,2)')
@@ -43,11 +40,41 @@ class MathTest(unittest.TestCase):
         self.assertEqual(i.evaluate(), 6.0)
         i.visualize(6)
 
-    def test_pow_log(self):
-        i = MathExpTree('pow(2,2)*log(9,3)')
+    def test_run_time_error(self):
+        i = MathExpTree('2+2/0')
+        i.convert()
+        i.visualize(8)
+        self.assertEqual(False, i.evaluate())
+
+    @given(a=st.integers(min_value=10, max_value=20),
+           b=st.integers(min_value=10, max_value=20),
+           c=st.integers(min_value=10, max_value=20),
+           d=st.integers(min_value=10, max_value=20))
+    def test_pow_log(self, a, b, c, d):
+        i = MathExpTree(
+            'pow(' +
+            str(a) +
+            ',' +
+            str(b) +
+            ')*log(' +
+            str(c) +
+            ',' +
+            str(d) +
+            ')')
         i.convert()
         i.visualize(7)
-        self.assertEqual(i.evaluate(), 8.0)
+        self.assertEqual(i.evaluate(), pow(a, b) * log(c, d))
+
+    @given(a=st.integers(min_value=0, max_value=100),
+           b=st.integers(min_value=0, max_value=100),
+           c=st.integers(min_value=0, max_value=100),
+           d=st.integers(min_value=0, max_value=100))
+    def test_add_minus(self, a, b, c, d):
+        i = MathExpTree('' + str(a) + '+' + str(b) +
+                        '+(' + str(c) + '-' + str(d) + ')')
+        i.convert()
+        self.assertEqual(i.evaluate(), a + b + (c - d))
+        i.visualize(2)
 
 
 if __name__ == '__main__':
