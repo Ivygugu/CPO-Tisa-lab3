@@ -148,6 +148,8 @@ class MathExpTree(object):
             elif i == '/':
                 right = inter_stack.pop(-1)
                 left = inter_stack.pop(-1)
+                if right == 0:
+                    return False
                 inter_stack.append(left / right)
             elif i == 'log':
                 right = inter_stack.pop(-1)
