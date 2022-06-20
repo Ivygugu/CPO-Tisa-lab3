@@ -1,5 +1,5 @@
 import unittest
-from math import sin, cos, tan, log
+from math import log
 
 from hypothesis import given
 import hypothesis.strategies as st
