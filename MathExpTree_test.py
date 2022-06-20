@@ -46,8 +46,8 @@ class MathTest(unittest.TestCase):
         i.visualize(8)
         self.assertEqual(False, i.evaluate())
 
-    @given(a=st.integers(min_value=10, max_value=20),
-           b=st.integers(min_value=10, max_value=20),
+    @given(a=st.integers(min_value=1, max_value=10),
+           b=st.integers(min_value=1, max_value=10),
            c=st.integers(min_value=10, max_value=20),
            d=st.integers(min_value=10, max_value=20))
     def test_pow_log(self, a, b, c, d):
